@@ -29,7 +29,7 @@ screen.onkey(l_paddle.move_down, "q")
 game = True
 while game:
     screen.update()
-    time.sleep(0.1)
+    time.sleep(ball.move_speed)
     ball.move()
     ball_x = ball.xcor()
     ball_y = ball.ycor()
@@ -38,19 +38,20 @@ while game:
         ball.bounce_y()
 
     #paddle collision
-    if ball_x > 350 and ball_x < 360:
-        if ball.distance(r_paddle) < 50:
+    if ball_x == 350:
+        if ball.distance(r_paddle) < 60:
             ball.bounce_x()
-    elif ball_x < -350 and ball_x > -360:
-        if ball.distance(l_paddle) < 50:
-
+    elif ball_x == -350:
+        if ball.distance(l_paddle) < 60:
             ball.bounce_x()
 
     #detect score
     if ball_x > 400:
+        l_score.increase_score()
         ball.reset_ball()
 
     elif ball_x < -400:
+        r_score.increase_score()
         ball.reset_ball()
     
 
